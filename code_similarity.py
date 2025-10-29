@@ -7,13 +7,22 @@ Features:
 - Accepts two code inputs (via file path or text)
 - Preprocesses code by stripping comments, whitespace, and normalizing casing
 - Uses difflib.SequenceMatcher to compute similarity score
+- AST-based structural analysis for detecting disguised plagiarism
+- Weighted scoring model (70% structure + 30% sequence)
 - Returns a percentage match
 """
 
 import re
 from difflib import SequenceMatcher
-from typing import Union
+from typing import Union, Optional
 from pathlib import Path
+
+# Import AST analyzer if available
+try:
+    from ast_analyzer import HybridSimilarityAnalyzer
+    AST_AVAILABLE = True
+except ImportError:
+    AST_AVAILABLE = False
 
 
 class CodePreprocessor:
@@ -140,7 +149,8 @@ class CodeSimilarityAnalyzer:
         return matcher.ratio()
     
     def analyze(self, input1: Union[str, Path], input2: Union[str, Path], 
-                preprocess: bool = True, language: str = 'auto') -> dict:
+                preprocess: bool = True, language: str = 'auto', 
+                mode: str = 'basic') -> dict:
         """
         Analyze similarity between two code inputs.
         
@@ -149,6 +159,7 @@ class CodeSimilarityAnalyzer:
             input2: Second code input (file path or text)
             preprocess: Whether to preprocess code (default: True)
             language: Language hint for preprocessing (default: 'auto')
+            mode: Analysis mode - 'basic', 'ast', or 'hybrid' (default: 'basic')
         
         Returns:
             Dictionary containing:
@@ -156,6 +167,7 @@ class CodeSimilarityAnalyzer:
                 - similarity_percentage: String formatted percentage
                 - code1_length: Character count of first code
                 - code2_length: Character count of second code
+                - (additional fields for AST/hybrid modes)
         """
         # Read code inputs
         code1 = self.read_code_input(input1)
@@ -165,6 +177,11 @@ class CodeSimilarityAnalyzer:
         original_length1 = len(code1)
         original_length2 = len(code2)
         
+        # Use AST-based analysis if requested and available
+        if mode in ['ast', 'hybrid'] and AST_AVAILABLE and language == 'python':
+            return self._analyze_with_ast(code1, code2, mode, original_length1, original_length2)
+        
+        # Fall back to basic text-based analysis
         # Preprocess if requested
         if preprocess:
             code1 = self.preprocessor.preprocess(code1, language)
@@ -174,6 +191,7 @@ class CodeSimilarityAnalyzer:
         similarity = self.compute_similarity(code1, code2)
         
         return {
+            'mode': 'basic',
             'similarity_score': similarity,
             'similarity_percentage': f"{similarity * 100:.1f}%",
             'code1_length': original_length1,
@@ -181,6 +199,31 @@ class CodeSimilarityAnalyzer:
             'preprocessed_code1_length': len(code1),
             'preprocessed_code2_length': len(code2)
         }
+    
+    def _analyze_with_ast(self, code1: str, code2: str, mode: str, 
+                         len1: int, len2: int) -> dict:
+        """
+        Analyze using AST-based approach.
+        
+        Args:
+            code1: First code string
+            code2: Second code string
+            mode: 'ast' or 'hybrid'
+            len1: Original length of code1
+            len2: Original length of code2
+            
+        Returns:
+            Dictionary with analysis results
+        """
+        analyzer = HybridSimilarityAnalyzer()
+        ast_result = analyzer.analyze(code1, code2)
+        
+        # Add basic info
+        ast_result['mode'] = mode
+        ast_result['code1_length'] = len1
+        ast_result['code2_length'] = len2
+        
+        return ast_result
 
 
 def main():
