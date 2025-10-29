@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>CIDE Analysis Report</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            background: #f9fafb;
+        }
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+        .header h1 {
+            margin: 0 0 10px 0;
+            font-size: 32px;
+        }
+        .header p {
+            margin: 5px 0;
+            opacity: 0.9;
+        }
+        .section {
+            background: white;
+            padding: 25px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        .section h2 {
+            color: #667eea;
+            margin-top: 0;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e5e7eb;
+        }
+        .status-badge {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #dc2626;
+            color: white;
+            border-radius: 5px;
+            font-weight: bold;
+            font-size: 18px;
+            margin: 10px 0;
+        }
+        .metric {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #f3f4f6;
+        }
+        .metric:last-child {
+            border-bottom: none;
+        }
+        .metric-label {
+            font-weight: 600;
+            color: #374151;
+        }
+        .metric-value {
+            color: #6b7280;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        th {
+            background: #f9fafb;
+            font-weight: 600;
+            color: #374151;
+        }
+        .footer {
+            text-align: center;
+            color: #6b7280;
+            margin-top: 30px;
+            padding: 20px;
+            border-top: 2px solid #e5e7eb;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>📊 Code Similarity Analysis Report</h1>
+        <p>Generated: 2025-10-29 23:12:35</p>
+        <p>CIDE - Code Integrity Detection Engine v2.0</p>
+    </div>
+    
+    <div class="section">
+        <h2>📁 File Information</h2>
+        <div class="metric">
+            <span class="metric-label">File 1:</span>
+            <span class="metric-value">original_code.py</span>
+        </div>
+        <div class="metric">
+            <span class="metric-label">File 2:</span>
+            <span class="metric-value">plagiarized_renamed.py</span>
+        </div>
+        <div class="metric">
+            <span class="metric-label">Analysis Mode:</span>
+            <span class="metric-value">HYBRID</span>
+        </div>
+        <div class="metric">
+            <span class="metric-label">Language:</span>
+            <span class="metric-value">python</span>
+        </div>
+    </div>
+    
+    <div class="section">
+        <h2>📈 Similarity Analysis</h2>
+        <div style="text-align: center;">
+            <div class="status-badge">PLAGIARISM DETECTED</div>
+        </div>
+
+        <div class="metric">
+            <span class="metric-label">Overall Similarity (Weighted):</span>
+            <span class="metric-value">87.2%</span>
+        </div>
+        <div class="metric">
+            <span class="metric-label">Structure Similarity:</span>
+            <span class="metric-value">100.0%</span>
+        </div>
+        <div class="metric">
+            <span class="metric-label">Sequence Similarity:</span>
+            <span class="metric-value">68.9%</span>
+        </div>
+        <div class="metric">
+            <span class="metric-label">Feature Similarity:</span>
+            <span class="metric-value">100.0%</span>
+        </div>
+        <div class="metric">
+            <span class="metric-label">Identical Structure:</span>
+            <span class="metric-value">YES</span>
+        </div>
+
+    </div>
+
+    <div class="section">
+        <h2>🚨 Plagiarism Detection</h2>
+        <div class="metric">
+            <span class="metric-label">Detection Status:</span>
+            <span class="metric-value">DETECTED</span>
+        </div>
+        <div class="metric">
+            <span class="metric-label">Confidence:</span>
+            <span class="metric-value">87.2%</span>
+        </div>
+        <div class="metric">
+            <span class="metric-label">Type:</span>
+            <span class="metric-value">Exact Copy</span>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>🔍 Code Features Comparison</h2>
+        <table>
+            <tr>
+                <th>Feature</th>
+                <th>File 1</th>
+                <th>File 2</th>
+                <th>Match</th>
+            </tr>
+
+            <tr>
+                <td>Functions</td>
+                <td>3</td>
+                <td>3</td>
+                <td>✓</td>
+            </tr>
+
+            <tr>
+                <td>Classes</td>
+                <td>0</td>
+                <td>0</td>
+                <td>✓</td>
+            </tr>
+
+            <tr>
+                <td>Loops</td>
+                <td>4</td>
+                <td>4</td>
+                <td>✓</td>
+            </tr>
+
+            <tr>
+                <td>Conditionals</td>
+                <td>4</td>
+                <td>4</td>
+                <td>✓</td>
+            </tr>
+
+        </table>
+    </div>
+
+    <div class="section">
+        <h2>📝 Conclusion</h2>
+        <p>
+
+            <strong style="color: #dc2626;">⚠️ PLAGIARISM DETECTED</strong><br><br>
+            The analysis indicates a high degree of similarity between the submitted files. 
+            The code structure and logic are substantially similar, suggesting potential plagiarism.
+
+        </p>
+    </div>
+    
+    <div class="footer">
+        <p><strong>CIDE - Code Integrity Detection Engine</strong></p>
+        <p>AST-based structural analysis for intelligent plagiarism detection</p>
+    </div>
+</body>
+</html>
