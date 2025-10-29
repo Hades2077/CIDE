@@ -31,8 +31,27 @@ A Python tool for computing similarity between two code files.
   - Whitespace/formatting changes
   - Code reordering (partial detection)
 
+## Milestone 3: Web UI & Visualization ✅
+
+### User Interface Features
+
+- 🌐 **Flask Web Application** - Clean, modern web interface
+- 🎨 **Tailwind CSS Design** - Responsive, beautiful UI
+- 📤 **File Upload** - Drag & drop or click to upload code files
+- 📊 **Interactive Charts** - Visual breakdown of similarity metrics using Chart.js
+- 🔍 **Side-by-Side Diff** - Visual code comparison with highlighting
+- 📈 **Results Dashboard** - Comprehensive analysis with:
+  - Overall similarity score
+  - Structure match percentage
+  - Plagiarism detection status
+  - Feature comparison (functions, classes, loops, etc.)
+  - Code metrics and statistics
+- ⚡ **Real-time Analysis** - Instant results after upload
+- 📱 **Responsive Design** - Works on desktop, tablet, and mobile
+
 ## Installation
 
+### For Command-Line Use
 No external dependencies required! Uses Python standard library only.
 
 ```bash
@@ -40,9 +59,34 @@ No external dependencies required! Uses Python standard library only.
 python --version
 ```
 
+### For Web Application
+Install Flask to run the web interface:
+
+```bash
+# Install dependencies
+pip install -r requirements.txt
+
+# Or install Flask directly
+pip install Flask
+```
+
 ## Quick Start
 
-### Basic Text-Based Analysis
+### Option 1: Web Interface (Recommended) 🌐
+
+```bash
+# Start the Flask server
+python app.py
+
+# Open browser to http://localhost:5000
+# Upload two files and see results instantly!
+```
+
+See [WEB_APP_GUIDE.md](WEB_APP_GUIDE.md) for detailed instructions.
+
+### Option 2: Command-Line / Python Script
+
+#### Basic Text-Based Analysis
 
 ```python
 from code_similarity import CodeSimilarityAnalyzer
@@ -127,6 +171,14 @@ print(f"Similarity: {result['similarity_percentage']}")
 
 ## Running Examples
 
+### Web Interface
+```bash
+# Start the web server
+python app.py
+# Then open http://localhost:5000 in your browser
+```
+
+### Command-Line Examples
 ```bash
 # Run basic text-based examples
 python code_similarity.py
@@ -142,17 +194,26 @@ python test_ast_analyzer.py
 
 # Run interactive demonstration
 python demo_plagiarism_detection.py
+
+# Test Flask app configuration
+python test_flask_app.py
 ```
 
 ## Project Structure
 
 ```
 CIDE/
+├── app.py                          # Flask web application
 ├── code_similarity.py              # Main module with basic & hybrid analyzers
 ├── ast_analyzer.py                 # AST-based structural analyzer
+├── templates/
+│   ├── index.html                 # Main web interface
+│   └── about.html                 # About page
+├── uploads/                        # Upload directory (auto-created)
 ├── test_similarity.py              # Basic analysis test suite
 ├── test_ast_analyzer.py            # AST analysis comprehensive tests
-├── demo_plagiarism_detection.py    # Interactive demonstration
+├── test_flask_app.py               # Flask app configuration test
+├── demo_plagiarism_detection.py    # Interactive CLI demonstration
 ├── examples/
 │   ├── example1.py                # Basic sample 1
 │   ├── example2.py                # Basic sample 2 (similar)
@@ -160,6 +221,9 @@ CIDE/
 │   ├── original_code.py           # Original implementation
 │   ├── plagiarized_renamed.py     # Plagiarized (renamed variables)
 │   └── different_code.py          # Completely different code
+├── requirements.txt                # Python dependencies
+├── WEB_APP_GUIDE.md               # Web app usage guide
+├── MILESTONE2_SUMMARY.md          # Milestone 2 documentation
 ├── LICENSE
 └── README.md
 ```

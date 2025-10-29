@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - CIDE</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="gradient-bg text-white shadow-lg">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                    <i class="fas fa-code text-3xl"></i>
+                    <div>
+                        <h1 class="text-2xl font-bold">CIDE</h1>
+                        <p class="text-sm text-purple-200">Code Integrity Detection Engine</p>
+                    </div>
+                </div>
+                <div class="flex space-x-4">
+                    <a href="/" class="hover:text-purple-200 transition">Home</a>
+                    <a href="/about" class="hover:text-purple-200 transition">About</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-6 py-8">
+        <!-- Hero -->
+        <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+            <div class="text-center mb-8">
+                <h2 class="text-4xl font-bold text-gray-800 mb-3">
+                    About CIDE
+                </h2>
+                <p class="text-xl text-gray-600">
+                    Advanced code similarity analysis and plagiarism detection
+                </p>
+            </div>
+        </div>
+
+        <!-- Features -->
+        <div class="grid md:grid-cols-3 gap-6 mb-8">
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <div class="text-center mb-4">
+                    <i class="fas fa-brain text-5xl text-purple-600"></i>
+                </div>
+                <h3 class="text-xl font-bold text-gray-800 mb-3 text-center">AST Analysis</h3>
+                <p class="text-gray-600 text-center">
+                    Uses Abstract Syntax Trees to understand code structure, not just compare text
+                </p>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <div class="text-center mb-4">
+                    <i class="fas fa-shield-alt text-5xl text-blue-600"></i>
+                </div>
+                <h3 class="text-xl font-bold text-gray-800 mb-3 text-center">Plagiarism Detection</h3>
+                <p class="text-gray-600 text-center">
+                    Detects disguised plagiarism through variable renaming and formatting changes
+                </p>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <div class="text-center mb-4">
+                    <i class="fas fa-balance-scale text-5xl text-green-600"></i>
+                </div>
+                <h3 class="text-xl font-bold text-gray-800 mb-3 text-center">Weighted Scoring</h3>
+                <p class="text-gray-600 text-center">
+                    70% structure + 30% text analysis for accurate similarity assessment
+                </p>
+            </div>
+        </div>
+
+        <!-- How It Works -->
+        <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+            <h3 class="text-2xl font-bold text-gray-800 mb-6">
+                <i class="fas fa-cogs text-purple-600"></i>
+                How It Works
+            </h3>
+            
+            <div class="space-y-6">
+                <div class="flex items-start space-x-4">
+                    <div class="flex-shrink-0 w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center">
+                        <span class="text-purple-600 font-bold text-xl">1</span>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-gray-800 mb-2">Upload Files</h4>
+                        <p class="text-gray-600">Upload two code files you want to compare. Supports Python, Java, JavaScript, C/C++, and more.</p>
+                    </div>
+                </div>
+
+                <div class="flex items-start space-x-4">
+                    <div class="flex-shrink-0 w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
+                        <span class="text-blue-600 font-bold text-xl">2</span>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-gray-800 mb-2">AST Parsing</h4>
+                        <p class="text-gray-600">Code is parsed into Abstract Syntax Trees, extracting structural information independent of naming.</p>
+                    </div>
+                </div>
+
+                <div class="flex items-start space-x-4">
+                    <div class="flex-shrink-0 w-12 h-12 bg-green-100 rounded-full flex items-center justify-center">
+                        <span class="text-green-600 font-bold text-xl">3</span>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-gray-800 mb-2">Normalization</h4>
+                        <p class="text-gray-600">Variable names, function names, and constants are replaced with generic placeholders.</p>
+                    </div>
+                </div>
+
+                <div class="flex items-start space-x-4">
+                    <div class="flex-shrink-0 w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center">
+                        <span class="text-yellow-600 font-bold text-xl">4</span>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-gray-800 mb-2">Structural Comparison</h4>
+                        <p class="text-gray-600">Normalized structures are compared to identify identical patterns and logic flow.</p>
+                    </div>
+                </div>
+
+                <div class="flex items-start space-x-4">
+                    <div class="flex-shrink-0 w-12 h-12 bg-red-100 rounded-full flex items-center justify-center">
+                        <span class="text-red-600 font-bold text-xl">5</span>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-gray-800 mb-2">Weighted Scoring</h4>
+                        <p class="text-gray-600">Combined score calculated: 70% structural similarity + 30% text sequence similarity.</p>
+                    </div>
+                </div>
+
+                <div class="flex items-start space-x-4">
+                    <div class="flex-shrink-0 w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center">
+                        <span class="text-purple-600 font-bold text-xl">6</span>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-gray-800 mb-2">Results & Visualization</h4>
+                        <p class="text-gray-600">Detailed results with charts, metrics, and side-by-side diff view.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Detection Capabilities -->
+        <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+            <h3 class="text-2xl font-bold text-gray-800 mb-6">
+                <i class="fas fa-check-circle text-green-600"></i>
+                Detection Capabilities
+            </h3>
+            
+            <div class="grid md:grid-cols-2 gap-6">
+                <div>
+                    <h4 class="font-bold text-gray-800 mb-3 flex items-center">
+                        <i class="fas fa-check text-green-600 mr-2"></i>
+                        What We Detect
+                    </h4>
+                    <ul class="space-y-2 text-gray-600">
+                        <li>✅ Renamed variables and functions</li>
+                        <li>✅ Identical code structure</li>
+                        <li>✅ Similar control flow patterns</li>
+                        <li>✅ Matching algorithm implementations</li>
+                        <li>✅ Code with added/removed comments</li>
+                        <li>✅ Reformatted and whitespace changes</li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold text-gray-800 mb-3 flex items-center">
+                        <i class="fas fa-times text-red-600 mr-2"></i>
+                        What We Ignore
+                    </h4>
+                    <ul class="space-y-2 text-gray-600">
+                        <li>❌ Comment differences</li>
+                        <li>❌ Whitespace and indentation</li>
+                        <li>❌ Variable naming conventions</li>
+                        <li>❌ String literal values</li>
+                        <li>❌ Numeric constant values</li>
+                        <li>❌ Code formatting styles</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Plagiarism Types -->
+        <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+            <h3 class="text-2xl font-bold text-gray-800 mb-6">
+                <i class="fas fa-exclamation-triangle text-red-600"></i>
+                Plagiarism Types Detected
+            </h3>
+            
+            <div class="space-y-4">
+                <div class="border-l-4 border-red-600 pl-4 py-2">
+                    <h4 class="font-bold text-gray-800">Exact Copy</h4>
+                    <p class="text-gray-600">Identical code structure (100% structural match). Even with renamed variables.</p>
+                </div>
+                
+                <div class="border-l-4 border-orange-600 pl-4 py-2">
+                    <h4 class="font-bold text-gray-800">Renamed Variables</h4>
+                    <p class="text-gray-600">Structural similarity > 90%. Variable/function names changed but logic identical.</p>
+                </div>
+                
+                <div class="border-l-4 border-yellow-600 pl-4 py-2">
+                    <h4 class="font-bold text-gray-800">Restructured Code</h4>
+                    <p class="text-gray-600">Structural similarity above threshold but < 90%. Code reorganized but similar.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Use Cases -->
+        <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+            <h3 class="text-2xl font-bold text-gray-800 mb-6">
+                <i class="fas fa-lightbulb text-yellow-600"></i>
+                Use Cases
+            </h3>
+            
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="border rounded-lg p-4">
+                    <h4 class="font-bold text-gray-800 mb-2 flex items-center">
+                        <i class="fas fa-graduation-cap text-purple-600 mr-2"></i>
+                        Academic Integrity
+                    </h4>
+                    <p class="text-gray-600 text-sm">
+                        Detect plagiarism in student assignments and projects
+                    </p>
+                </div>
+                
+                <div class="border rounded-lg p-4">
+                    <h4 class="font-bold text-gray-800 mb-2 flex items-center">
+                        <i class="fas fa-code-branch text-blue-600 mr-2"></i>
+                        Code Review
+                    </h4>
+                    <p class="text-gray-600 text-sm">
+                        Identify duplicate code in large codebases
+                    </p>
+                </div>
+                
+                <div class="border rounded-lg p-4">
+                    <h4 class="font-bold text-gray-800 mb-2 flex items-center">
+                        <i class="fas fa-balance-scale text-green-600 mr-2"></i>
+                        Legal Analysis
+                    </h4>
+                    <p class="text-gray-600 text-sm">
+                        Support copyright infringement investigations
+                    </p>
+                </div>
+                
+                <div class="border rounded-lg p-4">
+                    <h4 class="font-bold text-gray-800 mb-2 flex items-center">
+                        <i class="fas fa-recycle text-orange-600 mr-2"></i>
+                        Refactoring
+                    </h4>
+                    <p class="text-gray-600 text-sm">
+                        Find similar code patterns for consolidation
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Technical Details -->
+        <div class="bg-white rounded-lg shadow-lg p-8">
+            <h3 class="text-2xl font-bold text-gray-800 mb-6">
+                <i class="fas fa-code text-purple-600"></i>
+                Technical Details
+            </h3>
+            
+            <div class="space-y-4">
+                <div>
+                    <h4 class="font-bold text-gray-800 mb-2">Technology Stack</h4>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">Python</span>
+                        <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm">Flask</span>
+                        <span class="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm">AST Module</span>
+                        <span class="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-sm">Tailwind CSS</span>
+                        <span class="bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm">Chart.js</span>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold text-gray-800 mb-2">Supported Languages</h4>
+                    <p class="text-gray-600">
+                        Python (full AST support), Java, JavaScript, C/C++ (text-based analysis)
+                    </p>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold text-gray-800 mb-2">Scoring Algorithm</h4>
+                    <p class="text-gray-600">
+                        Weighted score = (0.7 × Structure Similarity) + (0.3 × Sequence Similarity)
+                    </p>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold text-gray-800 mb-2">Default Threshold</h4>
+                    <p class="text-gray-600">
+                        75% similarity considered potential plagiarism (configurable)
+                    </p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white mt-16 py-8">
+        <div class="container mx-auto px-6 text-center">
+            <p class="mb-2">
+                <i class="fas fa-code"></i> 
+                CIDE v2.0 - Code Integrity Detection Engine
+            </p>
+            <p class="text-gray-400 text-sm">
+                AST-based structural analysis for intelligent plagiarism detection
+            </p>
+        </div>
+    </footer>
+</body>
+</html>

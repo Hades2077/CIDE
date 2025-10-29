@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CIDE - Code Integrity Detection Engine</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .diff-table {
+            font-family: 'Courier New', monospace;
+            font-size: 0.875rem;
+        }
+        .diff-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .diff-table td {
+            padding: 2px 8px;
+            vertical-align: top;
+            white-space: pre-wrap;
+            word-break: break-all;
+        }
+        .diff-header {
+            background-color: #e5e7eb;
+            font-weight: bold;
+            padding: 8px;
+        }
+        .diff-add {
+            background-color: #dcfce7;
+        }
+        .diff-delete {
+            background-color: #fee2e2;
+        }
+        .diff-change {
+            background-color: #fef3c7;
+        }
+        .loading {
+            display: none;
+        }
+        .loading.active {
+            display: flex;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="gradient-bg text-white shadow-lg">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                    <i class="fas fa-code text-3xl"></i>
+                    <div>
+                        <h1 class="text-2xl font-bold">CIDE</h1>
+                        <p class="text-sm text-purple-200">Code Integrity Detection Engine</p>
+                    </div>
+                </div>
+                <div class="flex space-x-4">
+                    <a href="/" class="hover:text-purple-200 transition">Home</a>
+                    <a href="/about" class="hover:text-purple-200 transition">About</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-6 py-8">
+        <!-- Hero Section -->
+        <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+            <div class="text-center mb-8">
+                <h2 class="text-4xl font-bold text-gray-800 mb-3">
+                    <i class="fas fa-search text-purple-600"></i>
+                    Code Similarity Analyzer
+                </h2>
+                <p class="text-gray-600 text-lg">
+                    Advanced plagiarism detection using AST-based structural analysis
+                </p>
+                <div class="flex justify-center space-x-4 mt-4 text-sm">
+                    <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full">
+                        <i class="fas fa-check"></i> Variable Renaming Detection
+                    </span>
+                    <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full">
+                        <i class="fas fa-check"></i> Structure Analysis
+                    </span>
+                    <span class="bg-purple-100 text-purple-800 px-3 py-1 rounded-full">
+                        <i class="fas fa-check"></i> Weighted Scoring
+                    </span>
+                </div>
+            </div>
+
+            <!-- Upload Form -->
+            <form id="uploadForm" class="space-y-6">
+                <div class="grid md:grid-cols-2 gap-6">
+                    <!-- File 1 -->
+                    <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 hover:border-purple-500 transition">
+                        <label class="block text-center cursor-pointer">
+                            <div class="mb-3">
+                                <i class="fas fa-file-code text-5xl text-gray-400"></i>
+                            </div>
+                            <span class="text-gray-700 font-medium">Upload First File</span>
+                            <input type="file" name="file1" id="file1" class="hidden" accept=".py,.java,.js,.cpp,.c,.h,.txt" required>
+                            <p class="text-sm text-gray-500 mt-2" id="file1Name">Click to select file</p>
+                        </label>
+                    </div>
+
+                    <!-- File 2 -->
+                    <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 hover:border-purple-500 transition">
+                        <label class="block text-center cursor-pointer">
+                            <div class="mb-3">
+                                <i class="fas fa-file-code text-5xl text-gray-400"></i>
+                            </div>
+                            <span class="text-gray-700 font-medium">Upload Second File</span>
+                            <input type="file" name="file2" id="file2" class="hidden" accept=".py,.java,.js,.cpp,.c,.h,.txt" required>
+                            <p class="text-sm text-gray-500 mt-2" id="file2Name">Click to select file</p>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Analysis Mode -->
+                <div class="bg-gray-50 rounded-lg p-6">
+                    <label class="block text-gray-700 font-medium mb-3">
+                        <i class="fas fa-cog"></i> Analysis Mode
+                    </label>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <label class="flex items-center space-x-3 p-4 border-2 border-gray-200 rounded-lg cursor-pointer hover:border-purple-500 transition">
+                            <input type="radio" name="mode" value="basic" class="text-purple-600">
+                            <div>
+                                <div class="font-medium">Basic Text Analysis</div>
+                                <div class="text-sm text-gray-500">Simple text-based comparison</div>
+                            </div>
+                        </label>
+                        <label class="flex items-center space-x-3 p-4 border-2 border-purple-500 rounded-lg cursor-pointer bg-purple-50">
+                            <input type="radio" name="mode" value="hybrid" class="text-purple-600" checked>
+                            <div>
+                                <div class="font-medium">Hybrid AST Analysis</div>
+                                <div class="text-sm text-gray-500">70% structure + 30% text (Recommended)</div>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" class="w-full gradient-bg text-white font-bold py-4 px-6 rounded-lg hover:shadow-xl transition transform hover:-translate-y-1">
+                    <i class="fas fa-play-circle mr-2"></i>
+                    Analyze Code Similarity
+                </button>
+            </form>
+        </div>
+
+        <!-- Loading Indicator -->
+        <div id="loading" class="loading fixed inset-0 bg-black bg-opacity-50 items-center justify-center z-50">
+            <div class="bg-white rounded-lg p-8 max-w-sm mx-4">
+                <div class="text-center">
+                    <i class="fas fa-spinner fa-spin text-5xl text-purple-600 mb-4"></i>
+                    <p class="text-xl font-bold text-gray-800">Analyzing Code...</p>
+                    <p class="text-gray-600 mt-2">Please wait while we compare the files</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results Section -->
+        <div id="results" class="hidden">
+            <!-- Summary Cards -->
+            <div class="grid md:grid-cols-3 gap-6 mb-8">
+                <!-- Overall Score -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-lg font-bold text-gray-800">Overall Similarity</h3>
+                        <i class="fas fa-chart-pie text-purple-600 text-2xl"></i>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-5xl font-bold text-purple-600 mb-2" id="overallScore">--</div>
+                        <div class="text-gray-600" id="scoreLabel">Similarity Score</div>
+                    </div>
+                </div>
+
+                <!-- Structure Match -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-lg font-bold text-gray-800">Structure</h3>
+                        <i class="fas fa-sitemap text-blue-600 text-2xl"></i>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-5xl font-bold text-blue-600 mb-2" id="structureScore">--</div>
+                        <div class="text-gray-600">Structural Match</div>
+                    </div>
+                </div>
+
+                <!-- Plagiarism Status -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-lg font-bold text-gray-800">Detection</h3>
+                        <i class="fas fa-shield-alt text-red-600 text-2xl"></i>
+                    </div>
+                    <div class="text-center" id="plagiarismStatus">
+                        <div class="text-3xl font-bold mb-2">--</div>
+                        <div class="text-gray-600">Status</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Detailed Analysis -->
+            <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+                <h3 class="text-2xl font-bold text-gray-800 mb-6">
+                    <i class="fas fa-chart-bar text-purple-600"></i>
+                    Detailed Analysis
+                </h3>
+                
+                <!-- Chart -->
+                <div class="mb-8">
+                    <canvas id="similarityChart" height="100"></canvas>
+                </div>
+
+                <!-- Metrics Grid -->
+                <div class="grid md:grid-cols-2 gap-6" id="metricsGrid">
+                    <!-- Populated dynamically -->
+                </div>
+            </div>
+
+            <!-- Side-by-Side Diff -->
+            <div class="bg-white rounded-lg shadow-lg p-8">
+                <div class="flex items-center justify-between mb-6">
+                    <h3 class="text-2xl font-bold text-gray-800">
+                        <i class="fas fa-columns text-purple-600"></i>
+                        Side-by-Side Comparison
+                    </h3>
+                    <button onclick="toggleDiff()" class="bg-gray-200 hover:bg-gray-300 text-gray-800 px-4 py-2 rounded-lg transition">
+                        <i class="fas fa-eye"></i> Toggle View
+                    </button>
+                </div>
+                <div id="diffView" class="diff-table overflow-x-auto border rounded-lg">
+                    <!-- Populated dynamically -->
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white mt-16 py-8">
+        <div class="container mx-auto px-6 text-center">
+            <p class="mb-2">
+                <i class="fas fa-code"></i> 
+                CIDE v2.0 - Code Integrity Detection Engine
+            </p>
+            <p class="text-gray-400 text-sm">
+                AST-based structural analysis for intelligent plagiarism detection
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // File input handlers
+        document.getElementById('file1').addEventListener('change', function(e) {
+            document.getElementById('file1Name').textContent = e.target.files[0]?.name || 'Click to select file';
+        });
+
+        document.getElementById('file2').addEventListener('change', function(e) {
+            document.getElementById('file2Name').textContent = e.target.files[0]?.name || 'Click to select file';
+        });
+
+        // Form submission
+        document.getElementById('uploadForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            const loading = document.getElementById('loading');
+            const results = document.getElementById('results');
+            
+            // Show loading
+            loading.classList.add('active');
+            results.classList.add('hidden');
+            
+            try {
+                const response = await fetch('/analyze', {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    displayResults(data);
+                    results.classList.remove('hidden');
+                    results.scrollIntoView({ behavior: 'smooth' });
+                } else {
+                    alert('Error: ' + (data.error || 'Analysis failed'));
+                }
+            } catch (error) {
+                alert('Error: ' + error.message);
+            } finally {
+                loading.classList.remove('active');
+            }
+        });
+
+        let diffVisible = true;
+        function toggleDiff() {
+            const diffView = document.getElementById('diffView');
+            diffVisible = !diffVisible;
+            diffView.style.display = diffVisible ? 'block' : 'none';
+        }
+
+        function displayResults(data) {
+            // Overall score
+            const overallScore = data.weighted_percentage || data.similarity_percentage;
+            document.getElementById('overallScore').textContent = overallScore;
+            
+            // Structure score
+            if (data.mode === 'hybrid') {
+                document.getElementById('structureScore').textContent = 
+                    (data.structure_similarity * 100).toFixed(1) + '%';
+            } else {
+                document.getElementById('structureScore').textContent = 'N/A';
+            }
+            
+            // Plagiarism status
+            const plagiarismDiv = document.getElementById('plagiarismStatus');
+            if (data.plagiarism) {
+                if (data.plagiarism.is_plagiarism) {
+                    plagiarismDiv.innerHTML = `
+                        <div class="text-3xl font-bold text-red-600 mb-2">
+                            <i class="fas fa-exclamation-triangle"></i> DETECTED
+                        </div>
+                        <div class="text-gray-600">${data.plagiarism.plagiarism_type.replace('_', ' ')}</div>
+                    `;
+                } else {
+                    plagiarismDiv.innerHTML = `
+                        <div class="text-3xl font-bold text-green-600 mb-2">
+                            <i class="fas fa-check-circle"></i> CLEAR
+                        </div>
+                        <div class="text-gray-600">No plagiarism detected</div>
+                    `;
+                }
+            } else {
+                plagiarismDiv.innerHTML = `
+                    <div class="text-3xl font-bold text-gray-600 mb-2">N/A</div>
+                    <div class="text-gray-600">Basic mode</div>
+                `;
+            }
+            
+            // Chart
+            displayChart(data);
+            
+            // Metrics
+            displayMetrics(data);
+            
+            // Diff view
+            document.getElementById('diffView').innerHTML = data.diff_html;
+        }
+
+        function displayChart(data) {
+            const ctx = document.getElementById('similarityChart').getContext('2d');
+            
+            if (window.similarityChart) {
+                window.similarityChart.destroy();
+            }
+            
+            if (data.mode === 'hybrid') {
+                window.similarityChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Overall (Weighted)', 'Structure', 'Sequence', 'Features'],
+                        datasets: [{
+                            label: 'Similarity Score (%)',
+                            data: [
+                                data.weighted_score * 100,
+                                data.structure_similarity * 100,
+                                data.sequence_similarity * 100,
+                                data.feature_similarity * 100
+                            ],
+                            backgroundColor: [
+                                'rgba(147, 51, 234, 0.8)',
+                                'rgba(59, 130, 246, 0.8)',
+                                'rgba(16, 185, 129, 0.8)',
+                                'rgba(245, 158, 11, 0.8)'
+                            ]
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: true,
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                max: 100
+                            }
+                        }
+                    }
+                });
+            } else {
+                window.similarityChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Text Similarity'],
+                        datasets: [{
+                            label: 'Similarity Score (%)',
+                            data: [data.similarity_score * 100],
+                            backgroundColor: ['rgba(147, 51, 234, 0.8)']
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: true,
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                max: 100
+                            }
+                        }
+                    }
+                });
+            }
+        }
+
+        function displayMetrics(data) {
+            const grid = document.getElementById('metricsGrid');
+            let html = '';
+            
+            if (data.mode === 'hybrid' && data.features1) {
+                html += `
+                    <div class="border rounded-lg p-4">
+                        <h4 class="font-bold text-gray-800 mb-3">
+                            <i class="fas fa-file-code text-blue-600"></i> ${data.file1_name}
+                        </h4>
+                        <ul class="space-y-2 text-sm">
+                            <li><strong>Functions:</strong> ${data.features1.functions}</li>
+                            <li><strong>Classes:</strong> ${data.features1.classes}</li>
+                            <li><strong>Loops:</strong> ${data.features1.loops}</li>
+                            <li><strong>Conditionals:</strong> ${data.features1.conditionals}</li>
+                            <li><strong>Lines:</strong> ${data.code1_lines}</li>
+                        </ul>
+                    </div>
+                    <div class="border rounded-lg p-4">
+                        <h4 class="font-bold text-gray-800 mb-3">
+                            <i class="fas fa-file-code text-purple-600"></i> ${data.file2_name}
+                        </h4>
+                        <ul class="space-y-2 text-sm">
+                            <li><strong>Functions:</strong> ${data.features2.functions}</li>
+                            <li><strong>Classes:</strong> ${data.features2.classes}</li>
+                            <li><strong>Loops:</strong> ${data.features2.loops}</li>
+                            <li><strong>Conditionals:</strong> ${data.features2.conditionals}</li>
+                            <li><strong>Lines:</strong> ${data.code2_lines}</li>
+                        </ul>
+                    </div>
+                `;
+            } else {
+                html += `
+                    <div class="border rounded-lg p-4">
+                        <h4 class="font-bold text-gray-800 mb-3">File Information</h4>
+                        <ul class="space-y-2 text-sm">
+                            <li><strong>${data.file1_name}:</strong> ${data.code1_lines} lines</li>
+                            <li><strong>${data.file2_name}:</strong> ${data.code2_lines} lines</li>
+                            <li><strong>Language:</strong> ${data.language}</li>
+                            <li><strong>Mode:</strong> ${data.mode}</li>
+                        </ul>
+                    </div>
+                `;
+            }
+            
+            grid.innerHTML = html;
+        }
+    </script>
+</body>
+</html>
