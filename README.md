@@ -352,14 +352,40 @@ AST-based analysis detects:
 - AST-based comparison: **100%** structure match (87.2% weighted)
 - Verdict: **Plagiarism detected!** 🚨
 
+## Milestone 4: Professional Features (In Progress) 🚧
+
+### Production-Ready Enhancements
+
+- ✅ **Report Generation** - Download analysis reports in 3 formats:
+  - 📄 Text reports (.txt) - Terminal-friendly
+  - 📊 JSON reports (.json) - API integration
+  - 🌐 HTML reports (.html) - Printable/shareable
+- ✅ **Batch Comparison** - Compare multiple files simultaneously:
+  - All-pairs similarity matrix (NxN comparison)
+  - Statistical analysis (avg, min, max similarity)
+  - File rankings by average similarity
+  - Color-coded visualization (red/yellow/green)
+  - Pairwise detailed comparisons
+- 🚧 **MinHash Algorithm** - Fast similarity estimation (In Progress)
+  - LSH (Locality-Sensitive Hashing)
+  - O(1) similarity checks for scalability
+  - Pre-filtering for large batches
+- ⏳ **Admin Dashboard** - Track all analyses (Planned)
+- ⏳ **Database Storage** - Analysis history with SQLite/PostgreSQL (Planned)
+- ⏳ **Production Features** - Rate limiting, API docs, user sessions (Planned)
+
+See [MILESTONE4_SUMMARY.md](MILESTONE4_SUMMARY.md) for detailed documentation.
+
 ## Future Enhancements
 
 Potential additions for future milestones:
-- [ ] UI for file upload and comparison
+- [x] ~~UI for file upload and comparison~~ ✅
 - [ ] Support for more languages (JavaScript, Java, C++, etc.)
 - [x] ~~AST-based comparison for semantic similarity~~ ✅
 - [x] ~~Plagiarism detection features~~ ✅
-- [ ] Batch comparison of multiple files
-- [ ] Export results to JSON/CSV
-- [ ] Code diff visualization
+- [x] ~~Batch comparison of multiple files~~ ✅
+- [x] ~~Export results to JSON/CSV~~ ✅
+- [x] ~~Code diff visualization~~ ✅
 - [ ] Machine learning-based similarity detection
+- [ ] GitHub integration for repository scanning
+- [ ] Real-time collaboration features

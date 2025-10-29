@@ -60,7 +60,8 @@
                     </div>
                 </div>
                 <div class="flex space-x-4">
-                    <a href="/" class="hover:text-purple-200 transition">Home</a>
+                    <a href="/" class="hover:text-purple-200 transition font-bold">Home</a>
+                    <a href="/batch" class="hover:text-purple-200 transition">Batch Compare</a>
                     <a href="/about" class="hover:text-purple-200 transition">About</a>
                 </div>
             </div>
@@ -218,6 +219,32 @@
                 <!-- Metrics Grid -->
                 <div class="grid md:grid-cols-2 gap-6" id="metricsGrid">
                     <!-- Populated dynamically -->
+                </div>
+
+                <!-- Download Reports -->
+                <div class="mt-8 bg-gradient-to-r from-purple-50 to-blue-50 rounded-lg p-6">
+                    <h4 class="text-lg font-bold text-gray-800 mb-4">
+                        <i class="fas fa-download text-purple-600"></i>
+                        Download Report
+                    </h4>
+                    <div class="flex flex-wrap gap-3">
+                        <a href="/download/report/text" class="inline-flex items-center px-4 py-2 bg-gray-700 hover:bg-gray-800 text-white rounded-lg transition shadow-md">
+                            <i class="fas fa-file-alt mr-2"></i>
+                            Text Report (.txt)
+                        </a>
+                        <a href="/download/report/json" class="inline-flex items-center px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition shadow-md">
+                            <i class="fas fa-code mr-2"></i>
+                            JSON Report (.json)
+                        </a>
+                        <a href="/download/report/html" class="inline-flex items-center px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg transition shadow-md">
+                            <i class="fas fa-file-code mr-2"></i>
+                            HTML Report (.html)
+                        </a>
+                    </div>
+                    <p class="text-sm text-gray-600 mt-3">
+                        <i class="fas fa-info-circle"></i>
+                        Download detailed analysis report in your preferred format
+                    </p>
                 </div>
             </div>
 

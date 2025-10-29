@@ -1,0 +1,39 @@
+{
+  "report_metadata": {
+    "generated_at": "2025-10-29T23:12:35.288710",
+    "tool": "CIDE - Code Integrity Detection Engine",
+    "version": "2.0.0"
+  },
+  "analysis_result": {
+    "mode": "hybrid",
+    "language": "python",
+    "file1_name": "original_code.py",
+    "file2_name": "plagiarized_renamed.py",
+    "weighted_percentage": "87.2%",
+    "weighted_score": 0.872,
+    "structure_similarity": 1.0,
+    "sequence_similarity": 0.689,
+    "feature_similarity": 1.0,
+    "identical_structure": true,
+    "code1_lines": 50,
+    "code2_lines": 52,
+    "features1": {
+      "functions": 3,
+      "classes": 0,
+      "loops": 4,
+      "conditionals": 4
+    },
+    "features2": {
+      "functions": 3,
+      "classes": 0,
+      "loops": 4,
+      "conditionals": 4
+    },
+    "plagiarism": {
+      "is_plagiarism": true,
+      "confidence": 0.872,
+      "confidence_percentage": "87.2%",
+      "plagiarism_type": "exact_copy"
+    }
+  }
+}
